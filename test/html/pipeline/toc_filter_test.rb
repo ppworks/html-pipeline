@@ -23,7 +23,7 @@ class HTML::Pipeline::TableOfContentsFilterTest < Minitest::Test
 
   def test_custom_anchor_icons_added_properly
     orig = %(<h1>Ice cube</h1>)
-    expected = %(<h1>\n<a id="ice-cube" class="anchor" href="#ice-cube" aria-hidden="true">#</a>Ice cube</h1>)
+    expected = +"<h1><a id=\"ice-cube\" class=\"anchor\" href=\"#ice-cube\" aria-hidden=\"true\">#</a>Ice cube</h1>"
 
     assert_equal expected, TocFilter.call(orig, anchor_icon: '#').to_s
   end
@@ -121,9 +121,9 @@ class HTML::Pipeline::TableOfContentsFilterTest < Minitest::Test
 
       rendered_h1s = TocFilter.call(orig).search('h1').map(&:to_s)
 
-      assert_equal "<h1>\n<a id=\"日本語\" class=\"anchor\" href=\"#%E6%97%A5%E6%9C%AC%E8%AA%9E\" aria-hidden=\"true\"><span aria-hidden=\"true\" class=\"octicon octicon-link\"></span></a>日本語</h1>",
+      assert_equal "<h1><a id=\"日本語\" class=\"anchor\" href=\"#日本語\" aria-hidden=\"true\"><span aria-hidden=\"true\" class=\"octicon octicon-link\"></span></a>日本語</h1>",
                    rendered_h1s[0]
-      assert_equal "<h1>\n<a id=\"Русский\" class=\"anchor\" href=\"#%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9\" aria-hidden=\"true\"><span aria-hidden=\"true\" class=\"octicon octicon-link\"></span></a>Русский</h1>",
+      assert_equal "<h1><a id=\"Русский\" class=\"anchor\" href=\"#Русский\" aria-hidden=\"true\"><span aria-hidden=\"true\" class=\"octicon octicon-link\"></span></a>Русский</h1>",
                    rendered_h1s[1]
     end
 
@@ -131,9 +131,9 @@ class HTML::Pipeline::TableOfContentsFilterTest < Minitest::Test
       @orig = %(<h1>日本語</h1>
                 <h1>Русский</h1)
 
-      rendered_toc = Nokogiri::HTML::DocumentFragment.parse(toc).to_s
+      rendered_toc = Nokogiri::HTML5::DocumentFragment.parse(toc).to_s
 
-      expected = %(<ul class="section-nav">\n<li><a href="#%E6%97%A5%E6%9C%AC%E8%AA%9E">日本語</a></li>\n<li><a href="#%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9">Русский</a></li>\n</ul>)
+      expected = %(<ul class="section-nav">\n<li><a href="#日本語">日本語</a></li>\n<li><a href="#Русский">Русский</a></li>\n</ul>)
 
       assert_equal expected, rendered_toc
     end

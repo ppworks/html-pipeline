@@ -43,7 +43,7 @@ $ gem install html-pipeline
 
 This library provides a handful of chainable HTML filters to transform user
 content into markup. A filter takes an HTML string or
-`Nokogiri::HTML::DocumentFragment`, optionally manipulates it, and then
+`Nokogiri::HTML5::DocumentFragment`, optionally manipulates it, and then
 outputs the result.
 
 For example, to transform Markdown source into Markdown HTML:

@@ -18,7 +18,7 @@ class HTML::Pipeline::TeamMentionFilterTest < Minitest::Test
 
   def test_filtering_a_documentfragment
     body = '<p>@github/team: check it out.</p>'
-    doc  = Nokogiri::HTML::DocumentFragment.parse(body)
+    doc  = Nokogiri::HTML5::DocumentFragment.parse(body)
 
     res  = filter(doc, '/')
     assert_same doc, res
@@ -185,7 +185,7 @@ class HTML::Pipeline::TeamMentionFilterTest < Minitest::Test
 
   def test_team_pattern_can_be_customized
     body = '<p>@_abc/XYZ: test</p>'
-    doc  = Nokogiri::HTML::DocumentFragment.parse(body)
+    doc  = Nokogiri::HTML5::DocumentFragment.parse(body)
 
     res  = filter(doc, '/', /@(_[a-z]{3})\/([A-Z]{3})/)
 

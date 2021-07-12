@@ -149,7 +149,8 @@ class HTML::Pipeline::SanitizationFilterTest < Minitest::Test
 
   def test_details_tag_and_open_attribute_are_not_removed
     orig = %(<details open>Foo</details>)
-    assert_equal orig, SanitizationFilter.call(orig).to_s
+    # assert_equal orig, SanitizationFilter.call(orig).to_s
+    assert_equal "<details open=\"\">Foo</details>", SanitizationFilter.call(orig).to_s
   end
 
   def test_nested_details_tag_are_not_removed

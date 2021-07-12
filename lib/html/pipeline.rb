@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
+require 'nokogumbo'
 require 'active_support/xml_mini/nokogiri' # convert Documents to hashes
 
 module HTML
@@ -55,7 +56,7 @@ module HTML
     end
 
     # Our DOM implementation.
-    DocumentFragment = Nokogiri::HTML::DocumentFragment
+    DocumentFragment = Nokogiri::HTML5::DocumentFragment
 
     # Parse a String into a DocumentFragment object. When a DocumentFragment is
     # provided, return it verbatim.

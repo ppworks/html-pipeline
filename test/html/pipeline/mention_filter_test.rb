@@ -9,7 +9,7 @@ class HTML::Pipeline::MentionFilterTest < Minitest::Test
 
   def test_filtering_a_documentfragment
     body = '<p>@kneath: check it out.</p>'
-    doc  = Nokogiri::HTML::DocumentFragment.parse(body)
+    doc  = Nokogiri::HTML5::DocumentFragment.parse(body)
 
     res  = filter(doc, '/')
     assert_same doc, res
@@ -184,7 +184,7 @@ class HTML::Pipeline::MentionFilterTest < Minitest::Test
 
   def test_username_pattern_can_be_customized
     body = '<p>@_abc: test.</p>'
-    doc  = Nokogiri::HTML::DocumentFragment.parse(body)
+    doc  = Nokogiri::HTML5::DocumentFragment.parse(body)
 
     res  = filter(doc, '/', nil, /(_[a-z]{3})/)
 
@@ -195,14 +195,13 @@ class HTML::Pipeline::MentionFilterTest < Minitest::Test
 
   def test_filter_does_not_create_a_new_object_for_default_username_pattern
     body = '<div>@test</div>'
-    doc = Nokogiri::HTML::DocumentFragment.parse(body)
 
-    filter(doc.clone, '/', nil)
+    filter(Nokogiri::HTML5::DocumentFragment.parse(body), '/', nil)
     pattern_count = HTML::Pipeline::MentionFilter::MentionPatterns.length
-    filter(doc.clone, '/', nil)
+    filter(Nokogiri::HTML5::DocumentFragment.parse(body), '/', nil)
 
     assert_equal pattern_count, HTML::Pipeline::MentionFilter::MentionPatterns.length
-    filter(doc.clone, '/', nil, /test/)
+    filter(Nokogiri::HTML5::DocumentFragment.parse(body), '/', nil, /test/)
     assert_equal pattern_count + 1, HTML::Pipeline::MentionFilter::MentionPatterns.length
   end
 

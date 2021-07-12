@@ -3,7 +3,7 @@
 module HTML
   class Pipeline
     # Base class for user content HTML filters. Each filter takes an
-    # HTML string or Nokogiri::HTML::DocumentFragment, performs
+    # HTML string or Nokogiri::HTML5::DocumentFragment, performs
     # modifications and/or writes information to the result hash. Filters must
     # return a DocumentFragment (typically the same instance provided to the call
     # method) or a String with HTML markup.
@@ -54,7 +54,7 @@ module HTML
       # #mentioned_users, for example.
       attr_reader :result
 
-      # The Nokogiri::HTML::DocumentFragment to be manipulated. If the filter was
+      # The Nokogiri::HTML5::DocumentFragment to be manipulated. If the filter was
       # provided a String, parse into a DocumentFragment the first time this
       # method is called.
       def doc
@@ -70,7 +70,7 @@ module HTML
       end
 
       # The main filter entry point. The doc attribute is guaranteed to be a
-      # Nokogiri::HTML::DocumentFragment when invoked. Subclasses should modify
+      # Nokogiri::HTML5::DocumentFragment when invoked. Subclasses should modify
       # this document in place or extract information and add it to the context
       # hash.
       def call

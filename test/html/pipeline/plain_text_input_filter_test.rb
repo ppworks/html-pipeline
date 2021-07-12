@@ -7,7 +7,7 @@ class HTML::Pipeline::PlainTextInputFilterTest < Minitest::Test
 
   def test_fails_when_given_a_documentfragment
     body = '<p>heyo</p>'
-    doc  = Nokogiri::HTML::DocumentFragment.parse(body)
+    doc  = Nokogiri::HTML5::DocumentFragment.parse(body)
     assert_raises(TypeError) { PlainTextInputFilter.call(doc, {}) }
   end
 
