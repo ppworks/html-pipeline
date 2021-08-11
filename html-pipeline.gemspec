@@ -16,8 +16,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'activesupport', '>= 2'
-  gem.add_dependency 'nokogiri', '>= 1.4'
-  gem.add_dependency 'nokogumbo', '>= 2'
+  gem.add_dependency 'nokogiri', '>= 1.12.0'
 
   gem.post_install_message = <<msg
 -------------------------------------------------

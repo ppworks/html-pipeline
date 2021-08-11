@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
-require 'nokogumbo'
 require 'active_support/xml_mini/nokogiri' # convert Documents to hashes
 
 module HTML
